@@ -6,7 +6,7 @@ from streamlit_authenticator import Authenticate
 st.set_page_config(page_title="Vedsu Techonolgy", page_icon="📧")
 
 import eventpage
-import calender
+# import calender
 
 st.header("Event Calender")
 
