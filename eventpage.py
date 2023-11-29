@@ -15,7 +15,15 @@ from collections import defaultdict
 @st.cache_resource
 def init_connection():
     try:
-        client=pymongo.MongoClient("mongodb+srv://Vedsu:CVxB6F2N700cQ0qu@cluster0.thbmwqi.mongodb.net/")
+        db_username = st.secrets.db_username
+        db_password = st.secrets.db_password
+
+        mongo_uri_template = "mongodb+srv://{username}:{password}@cluster0.thbmwqi.mongodb.net/"
+        mongo_uri = mongo_uri_template.format(username=db_username, password=db_password)
+
+        client = pymongo.MongoClient(mongo_uri)
+        # mongodb+srv://Vedsu:CVxB6F2N700cQ0qu@cluster0.thbmwqi.mongodb.net/
+        # client=pymongo.MongoClient("mongodb+srv://Vedsu:CVxB6F2N700cQ0qu@cluster0.thbmwqi.mongodb.net/")
         return client
     except:
         st.write("Connection Could not be Established with database")
