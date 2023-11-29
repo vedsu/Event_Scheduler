@@ -1,0 +1,399 @@
+
+
+import streamlit as st
+import pandas as pd
+from datetime import datetime, timedelta
+import datetime as dt
+import pymongo
+from dateutil import parser
+import time
+from collections import defaultdict
+
+# if 'status' not in st.session_state:
+    
+#     st.session_state.active_value = False
+#     st.session_state.postpone_value = False
+#     st.session_state.cancel_value = False
+#     # st.session_state.status_key = False
+
+#Database Connections
+@st.cache_resource
+def init_connection():
+    try:
+        client=pymongo.MongoClient("mongodb+srv://Vedsu:CVxB6F2N700cQ0qu@cluster0.thbmwqi.mongodb.net/")
+        return client
+    except:
+        st.write("Connection Could not be Established with database")
+
+client = init_connection()
+db= client['EventDatabase']
+
+collection = db['Webinars']
+
+
+def main():
+    # st.session_state.active_value = False
+    # st.session_state.postpone_value = False
+    # st.session_state.cancel_value = False
+    
+    today = datetime.now()
+    start_date = today - timedelta(days=today.day - 1)
+    # st.sidebar.write(start_date)
+    end_date = start_date + timedelta(days=365)
+    # st.sidebar.write(end_date)
+    column1, column2 = st.columns(2)
+    with column1:
+        event_input = st.text_input("Enter Webinar/Event")
+        event_speaker = st.text_input('Enter Speaker')
+        event_submit = st.button("Submit", key="submit_event")
+    
+    with column2:
+        event_date = st.date_input("Select date", today, min_value=start_date, max_value=end_date)
+        event_time = st.time_input('Select time',dt.time(10, 00) )
+        event_duration = st.number_input('Enter Duration(mins)', min_value=0)
+    st.caption("---------------------------------------------------")
+    
+    columns1, columns2 = st.columns(2)
+    month_number=today.month
+    month_names = ["January", "February", "March", "April","May","June", "July", "August", "September", "October", "November", "December"]
+    month_name = month_names[month_number-1]
+    with columns2:
+        page_number = st.number_input("Page number:", min_value=1, value=month_number, max_value=12,)
+        st.markdown("<br>", unsafe_allow_html=True) 
+        page_name = month_names[page_number-1]
+    
+    with columns1:
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.subheader(page_name)
+        st.markdown("<br>", unsafe_allow_html=True) 
+
+    
+    # st.sidebar.write(today)
+    
+    
+    st.sidebar.subheader("Event Schedules")
+    
+    # Set the default time to 8:30 AM
+    
+    # t = st.time_input('Set an alarm for', dt.time(8, 45))
+
+    if event_submit:
+        # parsed_date = parser.parse(event_date)
+        # date = parsed_date.strftime("%Y-%m-%d")
+        formatted_date = event_date.strftime("%Y-%m-%d")
+        formatted_time = event_time.strftime("%H:%M")
+        # Find the weekday
+        weekday_number = event_date.weekday()
+        # Map weekday number to its name
+        weekday_names = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        weekday_name = weekday_names[weekday_number]
+        new_document = {'Webinar':event_input,'Speaker': event_speaker, 'Date':formatted_date, 'Time':formatted_time, 'Day': weekday_name, 'Duration':event_duration,'Status':'Active'}
+        try:                                
+            collection.insert_one(new_document)
+            st.sidebar.success("Event Created")
+        except:
+            st.sidebar.error("Failed to create event")
+        
+        time.sleep(2)
+        
+        # Refresh the app
+        st.experimental_rerun()  
+        
+        
+    
+
+
+                       
+    # Display the calendar
+    days_of_month = 31
+    if page_name=='January' or page_name=='March' or page_name=='May' or page_name=='July' or page_name=='August' or page_name=='October' or page_name=='December':
+        days_of_month=32
+    elif page_name=='February':
+        days_of_month=30
+    elif page_name=='April' or page_name=='June' or page_name=='May' or page_name=='September' or page_name=='November':
+        days_of_month=31
+    col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+    
+    # Create a defaultdict to store data for each month
+    monthly_data = defaultdict(list)
+    events = collection.find({}).sort("Date", pymongo.DESCENDING)
+    for event in events:
+        id = event.get("_id")
+        webinar = event.get("Webinar")
+        speaker = event.get("Speaker")
+        date = event.get("Date")
+        timing = event.get("Time")
+        day = event.get('Day')
+        duration = event.get('Duration')
+        status = event.get('Status')
+        # status = event.get('Status')
+        date_string = date
+
+        # Split the string by "-"
+        date_parts = date_string.split("-")
+
+        # Extract the month (index 1 in the split result)
+        month_int = int(date_parts[1])
+        
+    
+        day_int = int(date_parts[2])
+        # Create a dictionary with event details
+        event_data = {
+        "ID": id,
+        "Webinar": webinar,
+        "Speaker": speaker,
+        "Timing": timing,
+        "Day": day,
+        "Duration": duration,
+        "Status": status
+    }
+
+        # Append the event data to the corresponding month
+        monthly_data[month_int].append((day_int, event_data))
+    # st.caption(monthly_data)
+    
+    # Print the monthly data
+    # for month, events_data in monthly_data.items():
+    #         st.write(f"Month: {month}")
+    #         for day, event_data in events_data:
+    #              st.write(f"  Day {day}: {event_data}")
+    events_for_month = monthly_data.get(page_number, [])
+    # st.write(events_for_month)
+    # events_for_day = [event for event in events_for_month if event.get("Day") == day]
+    # # Extract day numbers from the list
+    day_numbers = [entry[0] for entry in events_for_month]
+    # # st.write(day_numbers)
+    # def radio_callback(extracted_dict,):
+    #         id_value = extracted_dict.get("ID", None)
+    #         collection.update_one(
+    #                      {"_id": id_value},
+    #                       {"$set": {"Status": st.session_state.status_value}})
+    #         st.sidebar.success("Status changed Successfully")
+    #         time.sleep(1)
+       
+
+
+
+
+    def display(events_for_day):
+        st.sidebar.write("-------------------------------------")
+        st.session_state.status
+        with st.container():
+            extracted_dict = events_for_day
+            id_value = extracted_dict.get("ID", None)
+            webinar_value = extracted_dict.get("Webinar", None)
+            speaker_value = extracted_dict.get("Speaker", None)
+            timing_value = extracted_dict.get("Timing", None)
+            day_value = extracted_dict.get("Day", None)
+            duration_value = extracted_dict.get("Duration", None)
+            status_value = extracted_dict.get('Status', None)
+            st.sidebar.write(f"**{webinar_value}**")
+            st.sidebar.write(f"**{speaker_value}**")
+            st.sidebar.write(f"**{timing_value}**")
+            st.sidebar.write(f"**{day_value}**")
+            st.sidebar.write(f"**{duration_value}**")
+            st.sidebar.warning(f"**{status_value}**")
+            # predefined_items = ["Active", "Postpone", "Cancelled"]
+            # options =  st.sidebar.radio("Select an item:", predefined_items, key=id_value)
+            # st.sidebar.button("Search", on_click=radio_callback, args=(options,status_value ))
+            # st.session_state.status_key = f"update_status_{id_value}"
+            Active_button_key = f"Active_checkbox_{id_value}"
+            Postpone_button_key = f"Postpone_checkbox_{id_value}"
+            Cancelled_button_key = f"Cancelled_checkbox_{id_value}"
+            if status_value =='Active':
+                
+                st.sidebar.button("Postpone", key=Postpone_button_key, on_click=postpone_callback, args=(id_value, ))
+                    
+
+                st.sidebar.button("Cancelled", key=Cancelled_button_key, on_click=cancel_callback, args=(id_value, ))
+                    
+
+               
+            elif status_value =='Postpone':
+                st.sidebar.button("Active", key=Active_button_key, on_click=active_callback, args=(id_value, ))
+                    
+                # st.session_state.cancel_value = st.sidebar.button("Cancelled", key=Cancelled_button_key)
+                st.sidebar.button("Cancelled", key=Cancelled_button_key, on_click=cancel_callback, args=(id_value, ))
+                    
+               
+            elif status_value =='Cancelled':
+                # st.session_state.active_value = st.sidebar.button("Active", key=Active_button_key, on_click=active_callback, )
+                st.sidebar.button("Active", key=Active_button_key, on_click=active_callback,args=(id_value, ) )
+                    
+
+                # st.session_state.postpone_value = st.sidebar.button("Postpone", key=Postpone_button_key)
+                st.sidebar.button("Postpone", key=Postpone_button_key, on_click=postpone_callback, args=(id_value, ))
+                
+            # st.session_state.read_checkbox_key = f"read_checkbox_{doc['_id']}"
+            
+            
+    def active_callback(id_value):
+        update(id_value, "Active")
+        # st.session_state.active_value = True
+        # st.session_state.postpone_value = False
+        # st.session_state.cancel_value = False
+    def postpone_callback(id_value):
+        update(id_value, "Postpone")
+        # st.session_state.postpone_value = True
+        # st.session_state.active_value = False
+        # st.session_state.cancel_value = False
+    def cancel_callback(id_value):
+        update(id_value, "Cancelled")
+        # st.session_state.cancel_value = True
+        # st.session_state.postpone_value = False
+        # st.session_state.active_value = False
+
+
+    def update(id_value, status_value):   
+        try: 
+            collection.update_one(
+                      {"_id": id_value},
+                        {"$set": {"Status": status_value}})
+            st.sidebar.success(f"Status Changed to {status_value}")
+        except:
+            st.siderbar.error("Failed!")
+        time.sleep(1)
+
+    
+
+    for i in range(1,days_of_month):
+        # if i in day_numbers:
+        #     events_for_day = [event for event in events_for_month if event[0] == i]
+        #     # st.write((events_for_day[0][1]))
+        #     for count in range(0,len(events_for_day)):
+        #         display(events_for_day[count][1])
+
+
+        # events_for_day = monthly_data.get(i, [])
+        # st.write(events_for_day)
+        
+    #     #     status = st.radio("Status",["Active", "Postpone", "Cancelled"], key = event.get("_id"))
+        if i%7==1:
+            with col1:
+                
+                with st.container():
+                    if i in day_numbers:
+                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        extracted_dict = matching_entry[1]
+                        webinar_value = extracted_dict.get("Webinar", None)
+                        if st.button(webinar_value):
+                            events_for_day = [event for event in events_for_month if event[0] == i]
+                            for count in range(0,len(events_for_day)):
+                                display(events_for_day[count][1])
+
+
+                        # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                    else:
+                        st.write(i)
+                        st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+
+            
+        # Add spacing between columns
+        elif i%7==2:
+            with col2:
+                with st.container():
+                    if i in day_numbers:
+                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        extracted_dict = matching_entry[1]
+                        webinar_value = extracted_dict.get("Webinar", None)
+                        # st.write(extracted_dict)
+                        if st.button(webinar_value):
+                            events_for_day = [event for event in events_for_month if event[0] == i]
+                            for count in range(0,len(events_for_day)):
+                                display(events_for_day[count][1])
+                        
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                    else:
+                        st.write(i)
+                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+        elif i%7==3:
+            with col3:
+                with st.container():
+                    if i in day_numbers:
+                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        extracted_dict = matching_entry[1]
+                        webinar_value = extracted_dict.get("Webinar", None)
+                        if st.button(webinar_value):
+                            events_for_day = [event for event in events_for_month if event[0] == i]
+                            for count in range(0,len(events_for_day)):
+                                display(events_for_day[count][1])
+                        # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                    else:
+                        st.write(i)
+                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+        elif i%7==4:
+            with col4:
+                with st.container():
+                    if i in day_numbers:
+                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        extracted_dict = matching_entry[1]
+                        webinar_value = extracted_dict.get("Webinar", None)
+                        if st.button(webinar_value):
+                            events_for_day = [event for event in events_for_month if event[0] == i]
+                            for count in range(0,len(events_for_day)):
+                                display(events_for_day[count][1])
+                        # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                    else:
+                        st.write(i)
+                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+        elif i%7==5:
+            with col5:
+                with st.container():
+                    if i in day_numbers:
+                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        extracted_dict = matching_entry[1]
+                        webinar_value = extracted_dict.get("Webinar", None)
+                        if st.button(webinar_value):
+                            events_for_day = [event for event in events_for_month if event[0] == i]
+                            for count in range(0,len(events_for_day)):
+                                display(events_for_day[count][1])
+                        # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                    else:
+                        st.write(i)
+                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+        elif i%7==6:
+            with col6:
+                with st.container():
+                    if i in day_numbers:
+                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        extracted_dict = matching_entry[1]
+                        webinar_value = extracted_dict.get("Webinar", None)
+                        if st.button(webinar_value):
+                            events_for_day = [event for event in events_for_month if event[0] == i]
+                            for count in range(0,len(events_for_day)):
+                                display(events_for_day[count][1])
+                        # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                    else:
+                        st.write(i)
+                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+        elif i%7==0:
+            with col7:
+                with st.container():
+                    if i in day_numbers:
+                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        extracted_dict = matching_entry[1]
+                        webinar_value = extracted_dict.get("Webinar", None)
+                        if st.button(webinar_value):
+                            events_for_day = [event for event in events_for_month if event[0] == i]
+                            for count in range(0,len(events_for_day)):
+                                display(events_for_day[count][1])
+                        # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                    else:
+                        st.write(i)
+                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                    
+ 
+   
