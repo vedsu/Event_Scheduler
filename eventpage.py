@@ -174,7 +174,7 @@ def main():
             day_value = extracted_dict.get("Day", None)
             duration_value = extracted_dict.get("Duration", None)
             status_value = extracted_dict.get('Status', None)
-            st.sidebar.write(f"**{webinar_value}**")
+            st.sidebar.write(f"**{webinar_value[:30]}**")
             st.sidebar.write(f"**{speaker_value}**")
             st.sidebar.write(f"**{timing_value}**")
             st.sidebar.write(f"**{day_value}**")
