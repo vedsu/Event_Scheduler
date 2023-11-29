@@ -174,7 +174,7 @@ def main():
             day_value = extracted_dict.get("Day", None)
             duration_value = extracted_dict.get("Duration", None)
             status_value = extracted_dict.get('Status', None)
-            st.sidebar.write(f"**{webinar_value[:30]}**")
+            st.sidebar.write(f"**{webinar_value}**")
             st.sidebar.write(f"**{speaker_value}**")
             st.sidebar.write(f"**{timing_value}**")
             st.sidebar.write(f"**{day_value}**")
@@ -250,7 +250,7 @@ def main():
                         # id_value = extracted_dict.get("ID", None)
                         webinar_button_key = f"webinar_button_{count}"
                         
-                        if st.button(webinar_value, key = webinar_button_key):
+                        if st.button(webinar_value[:30], key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
@@ -276,7 +276,7 @@ def main():
                         webinar_button_key = f"webinar_button_{count}"
                         # webinar_button_key = f"webinar_button_{id_value}"
                         # st.write(extracted_dict, key = webinar_button_key)
-                        if st.button(webinar_value, key = webinar_button_key):
+                        if st.button(webinar_value[:30], key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
