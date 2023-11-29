@@ -9,12 +9,7 @@ from dateutil import parser
 import time
 from collections import defaultdict
 
-# if 'status' not in st.session_state:
-    
-#     st.session_state.active_value = False
-#     st.session_state.postpone_value = False
-#     st.session_state.cancel_value = False
-#     # st.session_state.status_key = False
+
 
 #Database Connections
 @st.cache_resource
@@ -32,9 +27,7 @@ collection = db['Webinars']
 
 
 def main():
-    # st.session_state.active_value = False
-    # st.session_state.postpone_value = False
-    # st.session_state.cancel_value = False
+    
     
     today = datetime.now()
     start_date = today - timedelta(days=today.day - 1)
@@ -73,9 +66,7 @@ def main():
     
     st.sidebar.subheader("Event Schedules")
     
-    # Set the default time to 8:30 AM
     
-    # t = st.time_input('Set an alarm for', dt.time(8, 45))
 
     if event_submit:
         # parsed_date = parser.parse(event_date)
@@ -152,24 +143,12 @@ def main():
         monthly_data[month_int].append((day_int, event_data))
     # st.caption(monthly_data)
     
-    # Print the monthly data
-    # for month, events_data in monthly_data.items():
-    #         st.write(f"Month: {month}")
-    #         for day, event_data in events_data:
-    #              st.write(f"  Day {day}: {event_data}")
+    
     events_for_month = monthly_data.get(page_number, [])
     # st.write(events_for_month)
-    # events_for_day = [event for event in events_for_month if event.get("Day") == day]
-    # # Extract day numbers from the list
+    
     day_numbers = [entry[0] for entry in events_for_month]
-    # # st.write(day_numbers)
-    # def radio_callback(extracted_dict,):
-    #         id_value = extracted_dict.get("ID", None)
-    #         collection.update_one(
-    #                      {"_id": id_value},
-    #                       {"$set": {"Status": st.session_state.status_value}})
-    #         st.sidebar.success("Status changed Successfully")
-    #         time.sleep(1)
+   
        
 
 
@@ -193,10 +172,7 @@ def main():
             st.sidebar.write(f"**{day_value}**")
             st.sidebar.write(f"**{duration_value}**")
             st.sidebar.warning(f"**{status_value}**")
-            # predefined_items = ["Active", "Postpone", "Cancelled"]
-            # options =  st.sidebar.radio("Select an item:", predefined_items, key=id_value)
-            # st.sidebar.button("Search", on_click=radio_callback, args=(options,status_value ))
-            # st.session_state.status_key = f"update_status_{id_value}"
+            
             Active_button_key = f"Active_checkbox_{id_value}"
             Postpone_button_key = f"Postpone_checkbox_{id_value}"
             Cancelled_button_key = f"Cancelled_checkbox_{id_value}"
@@ -224,24 +200,18 @@ def main():
                 # st.session_state.postpone_value = st.sidebar.button("Postpone", key=Postpone_button_key)
                 st.sidebar.button("Postpone", key=Postpone_button_key, on_click=postpone_callback, args=(id_value, ))
                 
-            # st.session_state.read_checkbox_key = f"read_checkbox_{doc['_id']}"
+            
             
             
     def active_callback(id_value):
         update(id_value, "Active")
-        # st.session_state.active_value = True
-        # st.session_state.postpone_value = False
-        # st.session_state.cancel_value = False
+        
     def postpone_callback(id_value):
         update(id_value, "Postpone")
-        # st.session_state.postpone_value = True
-        # st.session_state.active_value = False
-        # st.session_state.cancel_value = False
+        
     def cancel_callback(id_value):
         update(id_value, "Cancelled")
-        # st.session_state.cancel_value = True
-        # st.session_state.postpone_value = False
-        # st.session_state.active_value = False
+        
 
 
     def update(id_value, status_value):   
@@ -257,17 +227,7 @@ def main():
     
 
     for i in range(1,days_of_month):
-        # if i in day_numbers:
-        #     events_for_day = [event for event in events_for_month if event[0] == i]
-        #     # st.write((events_for_day[0][1]))
-        #     for count in range(0,len(events_for_day)):
-        #         display(events_for_day[count][1])
-
-
-        # events_for_day = monthly_data.get(i, [])
-        # st.write(events_for_day)
-        
-    #     #     status = st.radio("Status",["Active", "Postpone", "Cancelled"], key = event.get("_id"))
+      
         if i%7==1:
             with col1:
                 
