@@ -234,7 +234,10 @@ def main():
 
     
 
+    count=0
     for i in range(1,days_of_month):
+        count+=1
+        
       
         if i%7==1:
             with col1:
@@ -244,8 +247,8 @@ def main():
                         matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        webinar_button_key = f"webinar_button_{id_value}"
+                        # id_value = extracted_dict.get("ID", None)
+                        webinar_button_key = f"webinar_button_{count}"
                         
                         if st.button(webinar_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
@@ -269,8 +272,8 @@ def main():
                         matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        webinar_button_key = f"webinar_button_{id_value}"
+                        # id_value = extracted_dict.get("ID", None)
+                        webinar_button_key = f"webinar_button_{count}"
                         # webinar_button_key = f"webinar_button_{id_value}"
                         # st.write(extracted_dict, key = webinar_button_key)
                         if st.button(webinar_value, key = webinar_button_key):
@@ -290,8 +293,8 @@ def main():
                         matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        webinar_button_key = f"webinar_button_{id_value}"
+                        # id_value = extracted_dict.get("ID", None)
+                        webinar_button_key = f"webinar_button_{count}"
                         if st.button(webinar_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
@@ -309,8 +312,8 @@ def main():
                         matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        webinar_button_key = f"webinar_button_{id_value}"
+                        # id_value = extracted_dict.get("ID", None)
+                        webinar_button_key = f"webinar_button_{count}"
                         if st.button(webinar_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
@@ -328,8 +331,8 @@ def main():
                         matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        webinar_button_key = f"webinar_button_{id_value}"
+                        # id_value = extracted_dict.get("ID", None)
+                        webinar_button_key = f"webinar_button_{count}"
                         if st.button(webinar_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
@@ -347,8 +350,8 @@ def main():
                         matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        webinar_button_key = f"webinar_button_{id_value}"
+                        # id_value = extracted_dict.get("ID", None)
+                        webinar_button_key = f"webinar_button_{count}"
                         if st.button(webinar_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
@@ -366,8 +369,8 @@ def main():
                         matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        webinar_button_key = f"webinar_button_{id_value}"
+                        # id_value = extracted_dict.get("ID", None)
+                        webinar_button_key = f"webinar_button_{count}"
                         if st.button(webinar_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
