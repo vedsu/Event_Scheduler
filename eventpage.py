@@ -164,7 +164,7 @@ def main():
 
     def display(events_for_day):
         st.sidebar.write("-------------------------------------")
-        st.session_state.status
+        # st.session_state.status
         with st.container():
             extracted_dict = events_for_day
             id_value = extracted_dict.get("ID", None)
