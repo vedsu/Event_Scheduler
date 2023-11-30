@@ -180,10 +180,16 @@ def main():
             status_value = extracted_dict.get('Status', None)
             date_value = extracted_dict.get('Date', None)
             industry_value = extracted_dict.get('Industry', None)
+            # Convert the string to a datetime object
+            original_date = datetime.strptime(date_value, "%Y-%m-%d")
+            
+            # Format the datetime object as a string with the desired format
+            formatted_date_string = original_date.strftime("%d-%m-%Y")
+
             st.sidebar.write(f"**{webinar_value}**")
             st.sidebar.write(f"**{speaker_value}**")
             st.sidebar.write(f"**{industry_value}**")
-            st.sidebar.write(f"**{date_value}**")
+            st.sidebar.write(f"**{formatted_date_string}**")
             st.sidebar.write(f"**{timing_value}**")
             st.sidebar.write(f"**{day_value}**")
             st.sidebar.write(f"**{duration_value}**")
