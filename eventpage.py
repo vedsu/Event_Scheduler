@@ -197,20 +197,20 @@ def main():
                 st.sidebar.button("Postpone", key=Postpone_button_key, on_click=postpone_callback, args=(id_value, ))
                     
 
-                st.sidebar.button("Cancelled", key=Cancelled_button_key, on_click=cancel_callback, args=(id_value, ))
+                st.sidebar.button("Cancel", key=Cancelled_button_key, on_click=cancel_callback, args=(id_value, ))
                     
 
                
             elif status_value =='Postpone':
-                st.sidebar.button("Active", key=Active_button_key, on_click=active_callback, args=(id_value, ))
+                st.sidebar.button("Activate", key=Active_button_key, on_click=active_callback, args=(id_value, ))
                     
                 # st.session_state.cancel_value = st.sidebar.button("Cancelled", key=Cancelled_button_key)
-                st.sidebar.button("Cancelled", key=Cancelled_button_key, on_click=cancel_callback, args=(id_value, ))
+                st.sidebar.button("Cancel", key=Cancelled_button_key, on_click=cancel_callback, args=(id_value, ))
                     
                
             elif status_value =='Cancelled':
                 # st.session_state.active_value = st.sidebar.button("Active", key=Active_button_key, on_click=active_callback, )
-                st.sidebar.button("Active", key=Active_button_key, on_click=active_callback,args=(id_value, ) )
+                st.sidebar.button("Activate", key=Active_button_key, on_click=active_callback,args=(id_value, ) )
                     
 
                 # st.session_state.postpone_value = st.sidebar.button("Postpone", key=Postpone_button_key)
