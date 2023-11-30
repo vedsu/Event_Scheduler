@@ -245,18 +245,19 @@ def main():
     count=0
     for i in range(1,days_of_month):
         count+=1
-        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
-        extracted_dict = matching_entry[1]
-        webinar_value = extracted_dict.get("Webinar", None)
-        id_value = extracted_dict.get("ID", None)
-        status_value = extracted_dict.get("Status", None)
-        webinar_button_key = f"webinar_button_{count}_{id_value}"
-        if webinar_value == 'Holiday':
-            message_button = f"{i} Holiday"
-        elif (status_value=='Active' and webinar_value!='Holiday'):
-            message_button = f"{i} Booked"
-        elif (status_value!='Active' and webinar_value!='Holiday'):
-            message_button = f"{i} status_value"
+        if i in day_numbers:
+            matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+            extracted_dict = matching_entry[1]
+            webinar_value = extracted_dict.get("Webinar", None)
+            id_value = extracted_dict.get("ID", None)
+            status_value = extracted_dict.get("Status", None)
+            webinar_button_key = f"webinar_button_{count}_{id_value}"
+            if webinar_value == 'Holiday':
+                message_button = f"{i} Holiday"
+            elif (status_value=='Active' and webinar_value!='Holiday'):
+                message_button = f"{i} Booked"
+            elif (status_value!='Active' and webinar_value!='Holiday'):
+                message_button = f"{i} status_value"
         
       
         if i%7==1:
