@@ -253,9 +253,9 @@ def main():
         webinar_button_key = f"webinar_button_{count}_{id_value}"
         if webinar_value == 'Holiday':
             message_button = f"{i} Holiday"
-        elif (status_value=='Active' and webinar_value!='Holiday')
+        elif (status_value=='Active' and webinar_value!='Holiday'):
             message_button = f"{i} Booked"
-        elif (status_value!='Active' and webinar_value!='Holiday')
+        elif (status_value!='Active' and webinar_value!='Holiday'):
             message_button = f"{i} status_value"
         
       
