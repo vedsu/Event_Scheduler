@@ -52,6 +52,8 @@ def main():
         event_date = st.date_input("Select date", today, min_value=start_date, max_value=end_date)
         event_time = st.time_input('Select time',dt.time(10, 00) )
         event_duration = st.number_input('Enter Duration(mins)', min_value=0)
+        options = ["Select", "Account", "Banking&Finance", "Finance", "FoodSafety", "Healthcare", "HumanResource", "Insurance", "Pharmaceutical"]
+        event_industry = st.selectbox("Select Industry", options)
     st.caption("---------------------------------------------------")
     
     columns1, columns2 = st.columns(2)
@@ -59,7 +61,7 @@ def main():
     month_names = ["January", "February", "March", "April","May","June", "July", "August", "September", "October", "November", "December"]
     month_name = month_names[month_number-1]
     with columns2:
-        page_number = st.number_input("Page number:", min_value=1, value=month_number, max_value=12,)
+        page_number = st.number_input("Month number:", min_value=1, value=month_number, max_value=12,)
         st.markdown("<br>", unsafe_allow_html=True) 
         page_name = month_names[page_number-1]
     
@@ -86,7 +88,7 @@ def main():
         # Map weekday number to its name
         weekday_names = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat", "Sun"]
         weekday_name = weekday_names[weekday_number]
-        new_document = {'Webinar':event_input,'Speaker': event_speaker, 'Date':formatted_date, 'Time':formatted_time, 'Day': weekday_name, 'Duration':event_duration,'Status':'Active'}
+        new_document = {'Webinar':event_input,'Speaker': event_speaker, 'Industry': event_industry, 'Date':formatted_date, 'Time':formatted_time, 'Day': weekday_name, 'Duration':event_duration,'Status':'Active'}
         try:                                
             collection.insert_one(new_document)
             st.sidebar.success("Event Created")
@@ -125,7 +127,7 @@ def main():
         day = event.get('Day')
         duration = event.get('Duration')
         status = event.get('Status')
-        # status = event.get('Status')
+        industry = event.get('Industry')
         date_string = date
 
         # Split the string by "-"
@@ -144,7 +146,9 @@ def main():
         "Timing": timing,
         "Day": day,
         "Duration": duration,
-        "Status": status
+        "Status": status,
+        "Industry": industry,
+        "Date": date,
     }
 
         # Append the event data to the corresponding month
@@ -174,8 +178,12 @@ def main():
             day_value = extracted_dict.get("Day", None)
             duration_value = extracted_dict.get("Duration", None)
             status_value = extracted_dict.get('Status', None)
+            date_value = extracted_dict.get('Date', None)
+            industry_value = extracted_dict.get('Industry', None)
             st.sidebar.write(f"**{webinar_value}**")
             st.sidebar.write(f"**{speaker_value}**")
+            st.sidebar.write(f"**{industry_value}**")
+            st.sidebar.write(f"**{date_value}**")
             st.sidebar.write(f"**{timing_value}**")
             st.sidebar.write(f"**{day_value}**")
             st.sidebar.write(f"**{duration_value}**")
@@ -215,7 +223,7 @@ def main():
         update(id_value, "Active")
         
     def postpone_callback(id_value):
-        update(id_value, "Postpone")
+        update(id_value, "Postponed")
         
     def cancel_callback(id_value):
         update(id_value, "Cancelled")
@@ -248,9 +256,10 @@ def main():
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
                         id_value = extracted_dict.get("ID", None)
+                        status_value = extracted_dict.get("Status", None)
                         webinar_button_key = f"webinar_button_{count}_{id_value}"
                         
-                        if st.button(webinar_value[:30], key = webinar_button_key):
+                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
@@ -273,11 +282,12 @@ def main():
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
                         id_value = extracted_dict.get("ID", None)
+                        status_value = extracted_dict.get("Status", None)
                         webinar_button_key = f"webinar_button_{count}_{id_value}"
                         # webinar_button_key = f"webinar_button_{count}"
                         # webinar_button_key = f"webinar_button_{id_value}"
                         # st.write(extracted_dict, key = webinar_button_key)
-                        if st.button(webinar_value[:30], key = webinar_button_key):
+                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
@@ -294,10 +304,11 @@ def main():
                         matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
+                        status_value = extracted_dict.get("Status", None)
                         id_value = extracted_dict.get("ID", None)
                         webinar_button_key = f"webinar_button_{count}_{id_value}"
                         # webinar_button_key = f"webinar_button_{count}"
-                        if st.button(webinar_value[:30], key = webinar_button_key):
+                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
@@ -315,9 +326,10 @@ def main():
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
                         id_value = extracted_dict.get("ID", None)
+                        status_value = extracted_dict.get("Status", None)
                         webinar_button_key = f"webinar_button_{count}_{id_value}"
                         # webinar_button_key = f"webinar_button_{count}"
-                        if st.button(webinar_value[:30], key = webinar_button_key):
+                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
@@ -335,9 +347,10 @@ def main():
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
                         id_value = extracted_dict.get("ID", None)
+                        status_value = extracted_dict.get("Status", None)
                         webinar_button_key = f"webinar_button_{count}_{id_value}"
                         # webinar_button_key = f"webinar_button_{count}"
-                        if st.button(webinar_value[:30], key = webinar_button_key):
+                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
@@ -355,9 +368,10 @@ def main():
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
                         id_value = extracted_dict.get("ID", None)
+                        status_value = extracted_dict.get("Status", None)
                         webinar_button_key = f"webinar_button_{count}_{id_value}"
                         # webinar_button_key = f"webinar_button_{count}"
-                        if st.button(webinar_value[:30], key = webinar_button_key):
+                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
@@ -375,9 +389,10 @@ def main():
                         extracted_dict = matching_entry[1]
                         webinar_value = extracted_dict.get("Webinar", None)
                         id_value = extracted_dict.get("ID", None)
+                        status_value = extracted_dict.get("Status", None)
                         webinar_button_key = f"webinar_button_{count}_{id_value}"
                         # webinar_button_key = f"webinar_button_{count}"
-                        if st.button(webinar_value[:30], key = webinar_button_key):
+                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
