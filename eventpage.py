@@ -285,12 +285,12 @@ def main():
                                 display(events_for_day[count][1])
 
 
-                        st.markdown("<br>", unsafe_allow_html=True)
+                        # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
 
@@ -320,12 +320,12 @@ def main():
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         
-                        st.markdown("<br>", unsafe_allow_html=True)
+                        # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==3:
@@ -350,12 +350,12 @@ def main():
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         # st.markdown("<br>", unsafe_allow_html=True)
-                        st.markdown("<br>", unsafe_allow_html=True)
+                        # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==4:
@@ -380,12 +380,12 @@ def main():
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         # st.markdown("<br>", unsafe_allow_html=True)
-                        st.markdown("<br>", unsafe_allow_html=True)
+                        # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==5:
@@ -410,12 +410,12 @@ def main():
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         # st.markdown("<br>", unsafe_allow_html=True)
-                        st.markdown("<br>", unsafe_allow_html=True)
+                        # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==6:
@@ -440,12 +440,12 @@ def main():
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         # st.markdown("<br>", unsafe_allow_html=True)
-                        st.markdown("<br>", unsafe_allow_html=True)
+                        # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==0:
@@ -470,12 +470,12 @@ def main():
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         # st.markdown("<br>", unsafe_allow_html=True)
-                        st.markdown("<br>", unsafe_allow_html=True)
+                        # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     
