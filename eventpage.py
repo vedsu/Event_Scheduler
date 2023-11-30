@@ -245,6 +245,18 @@ def main():
     count=0
     for i in range(1,days_of_month):
         count+=1
+        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+        extracted_dict = matching_entry[1]
+        webinar_value = extracted_dict.get("Webinar", None)
+        id_value = extracted_dict.get("ID", None)
+        status_value = extracted_dict.get("Status", None)
+        webinar_button_key = f"webinar_button_{count}_{id_value}"
+        if webinar_value == 'Holiday':
+            message_button = f"{i} Holiday"
+        elif (status_value=='Active' and webinar_value!='Holiday')
+            message_button = f"{i} Booked"
+        elif (status_value!='Active' and webinar_value!='Holiday')
+            message_button = f"{i} status_value"
         
       
         if i%7==1:
@@ -252,24 +264,33 @@ def main():
                 
                 with st.container():
                     if i in day_numbers:
-                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
-                        extracted_dict = matching_entry[1]
-                        webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        status_value = extracted_dict.get("Status", None)
-                        webinar_button_key = f"webinar_button_{count}_{id_value}"
+                        # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        # extracted_dict = matching_entry[1]
+                        # webinar_value = extracted_dict.get("Webinar", None)
+                        # id_value = extracted_dict.get("ID", None)
+                        # status_value = extracted_dict.get("Status", None)
+                        # webinar_button_key = f"webinar_button_{count}_{id_value}"
+                        # if webinar_value == 'Holiday':
+                        #     message_button = 'Holiday'
+                        # elif (status_value=='Active' and webinar_value!='Holiday')
+                        #     message_button = 'Booked'
+                        # elif (status_value!='Active' and webinar_value!='Holiday')
+                        #     message_button = 'status_value'
+                    
                         
-                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
+                        if st.button(message_button, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
 
 
-                        # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
 
             
@@ -278,129 +299,183 @@ def main():
             with col2:
                 with st.container():
                     if i in day_numbers:
-                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
-                        extracted_dict = matching_entry[1]
-                        webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        status_value = extracted_dict.get("Status", None)
-                        webinar_button_key = f"webinar_button_{count}_{id_value}"
-                        # webinar_button_key = f"webinar_button_{count}"
-                        # webinar_button_key = f"webinar_button_{id_value}"
-                        # st.write(extracted_dict, key = webinar_button_key)
-                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
+                        # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        # extracted_dict = matching_entry[1]
+                        # webinar_value = extracted_dict.get("Webinar", None)
+                        # id_value = extracted_dict.get("ID", None)
+                        # status_value = extracted_dict.get("Status", None)
+                        # webinar_button_key = f"webinar_button_{count}_{id_value}"
+                        # # webinar_button_key = f"webinar_button_{count}"
+                        # # webinar_button_key = f"webinar_button_{id_value}"
+                        # # st.write(extracted_dict, key = webinar_button_key)
+                        # if webinar_value == 'Holiday':
+                        #     message_button = 'Holiday'
+                        # elif (status_value=='Active' and webinar_value!='Holiday')
+                        #     message_button = 'Booked'
+                        # elif (status_value!='Active' and webinar_value!='Holiday')
+                        #     message_button = 'status_value'
+                        if st.button(message_button, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         
+                        st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==3:
             with col3:
                 with st.container():
                     if i in day_numbers:
-                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
-                        extracted_dict = matching_entry[1]
-                        webinar_value = extracted_dict.get("Webinar", None)
-                        status_value = extracted_dict.get("Status", None)
-                        id_value = extracted_dict.get("ID", None)
-                        webinar_button_key = f"webinar_button_{count}_{id_value}"
-                        # webinar_button_key = f"webinar_button_{count}"
-                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
+                        # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        # extracted_dict = matching_entry[1]
+                        # webinar_value = extracted_dict.get("Webinar", None)
+                        # status_value = extracted_dict.get("Status", None)
+                        # id_value = extracted_dict.get("ID", None)
+                        # webinar_button_key = f"webinar_button_{count}_{id_value}"
+                        # # webinar_button_key = f"webinar_button_{count}"
+                        # if webinar_value == 'Holiday':
+                        #     message_button = 'Holiday'
+                        # elif (status_value=='Active' and webinar_value!='Holiday')
+                        #     message_button = 'Booked'
+                        # elif (status_value!='Active' and webinar_value!='Holiday')
+                        #     message_button = 'status_value'
+                        if st.button(message_button, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==4:
             with col4:
                 with st.container():
                     if i in day_numbers:
-                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
-                        extracted_dict = matching_entry[1]
-                        webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        status_value = extracted_dict.get("Status", None)
-                        webinar_button_key = f"webinar_button_{count}_{id_value}"
-                        # webinar_button_key = f"webinar_button_{count}"
-                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
+                        # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        # extracted_dict = matching_entry[1]
+                        # webinar_value = extracted_dict.get("Webinar", None)
+                        # id_value = extracted_dict.get("ID", None)
+                        # status_value = extracted_dict.get("Status", None)
+                        # if webinar_value == 'Holiday':
+                        #     message_button = 'Holiday'
+                        # elif (status_value=='Active' and webinar_value!='Holiday')
+                        #     message_button = 'Booked'
+                        # elif (status_value!='Active' and webinar_value!='Holiday')
+                        #     message_button = 'status_value'
+                        # webinar_button_key = f"webinar_button_{count}_{id_value}"
+                        # # webinar_button_key = f"webinar_button_{count}"
+                        if st.button(message_button, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==5:
             with col5:
                 with st.container():
                     if i in day_numbers:
-                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
-                        extracted_dict = matching_entry[1]
-                        webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        status_value = extracted_dict.get("Status", None)
-                        webinar_button_key = f"webinar_button_{count}_{id_value}"
-                        # webinar_button_key = f"webinar_button_{count}"
-                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
+                        # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        # extracted_dict = matching_entry[1]
+                        # webinar_value = extracted_dict.get("Webinar", None)
+                        # id_value = extracted_dict.get("ID", None)
+                        # status_value = extracted_dict.get("Status", None)
+                        # webinar_button_key = f"webinar_button_{count}_{id_value}"
+                        # # webinar_button_key = f"webinar_button_{count}"
+                        # if webinar_value == 'Holiday':
+                        #     message_button = 'Holiday'
+                        # elif (status_value=='Active' and webinar_value!='Holiday')
+                        #     message_button = 'Booked'
+                        # elif (status_value!='Active' and webinar_value!='Holiday')
+                        #     message_button = 'status_value'
+                        if st.button(message_button, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==6:
             with col6:
                 with st.container():
                     if i in day_numbers:
-                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
-                        extracted_dict = matching_entry[1]
-                        webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        status_value = extracted_dict.get("Status", None)
-                        webinar_button_key = f"webinar_button_{count}_{id_value}"
-                        # webinar_button_key = f"webinar_button_{count}"
-                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
+                        # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        # extracted_dict = matching_entry[1]
+                        # webinar_value = extracted_dict.get("Webinar", None)
+                        # id_value = extracted_dict.get("ID", None)
+                        # status_value = extracted_dict.get("Status", None)
+                        # webinar_button_key = f"webinar_button_{count}_{id_value}"
+                        # # webinar_button_key = f"webinar_button_{count}"
+                        # if webinar_value == 'Holiday':
+                        #     message_button = 'Holiday'
+                        # elif (status_value=='Active' and webinar_value!='Holiday')
+                        #     message_button = 'Booked'
+                        # elif (status_value!='Active' and webinar_value!='Holiday')
+                        #     message_button = 'status_value'
+                        if st.button(message_button, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==0:
             with col7:
                 with st.container():
                     if i in day_numbers:
-                        matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
-                        extracted_dict = matching_entry[1]
-                        webinar_value = extracted_dict.get("Webinar", None)
-                        id_value = extracted_dict.get("ID", None)
-                        status_value = extracted_dict.get("Status", None)
-                        webinar_button_key = f"webinar_button_{count}_{id_value}"
-                        # webinar_button_key = f"webinar_button_{count}"
-                        if st.button("Booked" if (status_value=='Active' and webinar_value!='Holiday')else status_value, key = webinar_button_key):
+                        # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
+                        # extracted_dict = matching_entry[1]
+                        # webinar_value = extracted_dict.get("Webinar", None)
+                        # id_value = extracted_dict.get("ID", None)
+                        # status_value = extracted_dict.get("Status", None)
+                        # webinar_button_key = f"webinar_button_{count}_{id_value}"
+                        # # webinar_button_key = f"webinar_button_{count}"
+                        # if webinar_value == 'Holiday':
+                        #     message_button = 'Holiday'
+                        # elif (status_value=='Active' and webinar_value!='Holiday')
+                        #     message_button = 'Booked'
+                        # elif (status_value!='Active' and webinar_value!='Holiday')
+                        #     message_button = 'status_value'
+                        if st.button(message_button, key = webinar_button_key):
                             events_for_day = [event for event in events_for_month if event[0] == i]
                             for count in range(0,len(events_for_day)):
                                 display(events_for_day[count][1])
                         # st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("<br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
-                        st.markdown("<br>", unsafe_allow_html=True) 
+                        st.markdown("<br><br>", unsafe_allow_html=True)
+                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     
  
