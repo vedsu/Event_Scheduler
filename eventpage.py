@@ -253,9 +253,9 @@ def main():
             status_value = extracted_dict.get("Status", None)
             webinar_button_key = f"webinar_button_{count}_{id_value}"
             if webinar_value == 'Holiday':
-                message_button = f"{i} {Holiday}"
+                message_button = f"{i} Holiday"
             elif (status_value=='Active' and webinar_value!='Holiday'):
-                message_button = f"{i} {Booked}"
+                message_button = f"{i} Booked"
             elif (status_value!='Active' and webinar_value!='Holiday'):
                 message_button = f"{i} {status_value}"
         
