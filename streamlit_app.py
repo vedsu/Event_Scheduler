@@ -35,7 +35,7 @@ with st.container():
             authenticator.logout('Logout', 'main')
         
         with col2:
-            st.markdown(f'Welcome - <span style="color: orange;">*{name}*</span>', unsafe_allow_html=True)
+            st.markdown(f'Welcome - <span style="color: blue;">*{name}*</span>', unsafe_allow_html=True)
         eventpage.main()
     elif authentication_status == False:
         st.error('Username/password is incorrect')
