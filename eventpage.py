@@ -275,9 +275,9 @@ def main():
         
       
         if i%7==1:
+            st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
             with col1:
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     
                     if i in day_numbers:
@@ -313,9 +313,9 @@ def main():
             
         # Add spacing between columns
         elif i%7==2:
+            st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
             with col2:
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     
                     if i in day_numbers:
@@ -348,9 +348,9 @@ def main():
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==3:
+            st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
             with col3:
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
@@ -380,9 +380,9 @@ def main():
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==4:
+            st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
             with col4:
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
@@ -412,9 +412,9 @@ def main():
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==5:
+            st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
             with col5:
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
@@ -444,9 +444,9 @@ def main():
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==6:
+            st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
             with col6:
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
@@ -478,7 +478,8 @@ def main():
         elif i%7==0:
             with col7:
                 st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                
                 with st.container():
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
