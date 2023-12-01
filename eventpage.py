@@ -476,9 +476,9 @@ def main():
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==0:
+            st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
             with col7:
-                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                st.markdown("<br>", unsafe_allow_html=True)
                 
                 with st.container():
                     if i in day_numbers:
