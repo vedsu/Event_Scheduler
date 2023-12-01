@@ -303,12 +303,12 @@ def main():
 
                         # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
                         st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
 
             
         # Add spacing between columns
@@ -341,11 +341,11 @@ def main():
                         
                         # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
                         st.markdown("<br>", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==3:
             st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
@@ -373,12 +373,12 @@ def main():
                         # st.markdown("<br>", unsafe_allow_html=True)
                         # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
                         st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==4:
             st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
@@ -405,12 +405,12 @@ def main():
                         # st.markdown("<br>", unsafe_allow_html=True)
                         # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
                         st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==5:
             st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
@@ -437,12 +437,12 @@ def main():
                         # st.markdown("<br>", unsafe_allow_html=True)
                         # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
                         st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==6:
             st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
@@ -469,12 +469,12 @@ def main():
                         # st.markdown("<br>", unsafe_allow_html=True)
                         # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
                         st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==0:
             st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
@@ -502,12 +502,12 @@ def main():
                         # st.markdown("<br>", unsafe_allow_html=True)
                         # st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     else:
                         st.write(i)
                         st.markdown("<br>", unsafe_allow_html=True)
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
-                        st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
+                        # st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                     
  
    
