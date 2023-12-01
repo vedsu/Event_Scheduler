@@ -46,6 +46,8 @@ def main():
     with column1:
         event_input = st.text_input("Enter Webinar/Event")
         event_speaker = st.text_input('Enter Speaker')
+        options = ["Select", "profstraining.com", "hcprofs.com", "hospcompliance.com", "bankingeducator.com", "pharmaprofs.com", "webinarsacademy.com"]
+        event_website = st.selectbox("Select Website", options)
         event_submit = st.button("Submit", key="submit_event")
     
     with column2:
@@ -88,7 +90,7 @@ def main():
         # Map weekday number to its name
         weekday_names = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat", "Sun"]
         weekday_name = weekday_names[weekday_number]
-        new_document = {'Webinar':event_input,'Speaker': event_speaker, 'Industry': event_industry, 'Date':formatted_date, 'Time':formatted_time, 'Day': weekday_name, 'Duration':event_duration,'Status':'Active'}
+        new_document = {'Webinar':event_input,'Speaker': event_speaker, 'Website':event_website, 'Industry': event_industry, 'Date':formatted_date, 'Time':formatted_time, 'Day': weekday_name, 'Duration':event_duration,'Status':'Active'}
         try:                                
             collection.insert_one(new_document)
             st.sidebar.success("Event Created")
@@ -128,6 +130,8 @@ def main():
         duration = event.get('Duration')
         status = event.get('Status')
         industry = event.get('Industry')
+        #Website
+        website = event.get('Website')
         date_string = date
 
         # Split the string by "-"
@@ -149,6 +153,7 @@ def main():
         "Status": status,
         "Industry": industry,
         "Date": date,
+        "Website": website,
     }
 
         # Append the event data to the corresponding month
@@ -180,6 +185,8 @@ def main():
             status_value = extracted_dict.get('Status', None)
             date_value = extracted_dict.get('Date', None)
             industry_value = extracted_dict.get('Industry', None)
+            website_value = extracted_dict.get('Website', None)
+            
             # Convert the string to a datetime object
             original_date = datetime.strptime(date_value, "%Y-%m-%d")
             
@@ -190,6 +197,7 @@ def main():
             st.sidebar.write(f"**{speaker_value}**")
             st.sidebar.write(f"**{industry_value}**")
             st.sidebar.write(f"**{formatted_date_string}**")
+            st.sidebar.write(f"**{website_value}**")
             st.sidebar.write(f"**{timing_value}**")
             st.sidebar.write(f"**{day_value}**")
             st.sidebar.write(f"**{duration_value}**")
@@ -268,8 +276,10 @@ def main():
       
         if i%7==1:
             with col1:
+                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 
                 with st.container():
+                    
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
                         # extracted_dict = matching_entry[1]
@@ -304,7 +314,9 @@ def main():
         # Add spacing between columns
         elif i%7==2:
             with col2:
+                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
+                    
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
                         # extracted_dict = matching_entry[1]
@@ -336,6 +348,7 @@ def main():
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==3:
             with col3:
+                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
@@ -366,6 +379,7 @@ def main():
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==4:
             with col4:
+                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
@@ -396,6 +410,7 @@ def main():
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==5:
             with col5:
+                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
@@ -426,6 +441,7 @@ def main():
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==6:
             with col6:
+                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
@@ -456,6 +472,7 @@ def main():
                         st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
         elif i%7==0:
             with col7:
+                st.markdown("&nbsp;&nbsp;&nbsp;", unsafe_allow_html=True)
                 with st.container():
                     if i in day_numbers:
                         # matching_entry = next((entry for entry in events_for_month if entry[0] == i), None)
